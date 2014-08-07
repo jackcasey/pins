@@ -6,8 +6,9 @@ public class Colourable : MonoBehaviour {
 	static Color blue = 	Color.blue;
 	static Color yellow = 	Color.yellow;
 	static Color gray = 	Color.gray;
+	static Color black =    Color.black;
 
-	static Color[] colors = { red, blue, yellow, gray };
+	static Color[] colors = { red, blue, yellow, gray, black };
 	
 	public int color;
 

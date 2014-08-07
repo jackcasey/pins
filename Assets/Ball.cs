@@ -13,13 +13,21 @@ public class Ball : MonoBehaviour {
 		} 
 		else 
 		{
+			Destroy(this.gameObject);
 			flasher.flash();
+		}
+
+		Draggable d = other.GetComponent<Draggable>();
+		if (d)
+		{
+			d.ResetPosition();
 		}
 	}
 
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
+		this.GetComponent<Colourable>().color = Random.Range(0,3);
 		flasher = GameObject.FindGameObjectWithTag("redflash").GetComponent<Flasher>();
 	}
 	
@@ -28,3 +36,4 @@ public class Ball : MonoBehaviour {
 	}
 	
 }
+	
