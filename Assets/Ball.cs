@@ -14,14 +14,15 @@ public class Ball : MonoBehaviour {
 		else 
 		{
 			Destroy(this.gameObject);
+			Draggable d = other.GetComponent<Draggable>();
+			if (d)
+			{
+				d.ResetPosition();
+			}
 			flasher.flash();
 		}
 
-		Draggable d = other.GetComponent<Draggable>();
-		if (d)
-		{
-			d.ResetPosition();
-		}
+
 	}
 
 
