@@ -8,6 +8,8 @@ public class Draggable : MonoBehaviour
 	private Vector3 offset;
 	private Vector3 initialPosition;
 	private bool dragging;
+	public float min;
+	public float max;
 	void Start()
 	{
 		initialPosition = transform.position;
@@ -32,7 +34,9 @@ public class Draggable : MonoBehaviour
 			return;
 		Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
 		Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
-		curPosition = new Vector3(curPosition.x, transform.position.y, transform.position.z);
+		float x = Mathf.Min (curPosition.x, max);
+		x = Mathf.Max (x, min);
+		curPosition = new Vector3(x, transform.position.y, transform.position.z);
 		transform.position = curPosition;
 	}
 
