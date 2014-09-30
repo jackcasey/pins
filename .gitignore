@@ -5,6 +5,8 @@ Temp/
 Obj/
 UnityGenerated/
 Library/
+pins.exe
+pins_Data/
 
 # ===================================== #
 # Visual Studio / MonoDevelop generated #

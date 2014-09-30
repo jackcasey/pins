@@ -1,40 +1,34 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Ball : MonoBehaviour {
+public class Ball : MonoBehaviour
+{
+  private Flasher flasher;
 
-	private Flasher flasher;
+  void OnTriggerEnter(Collider other)
+  {
+    if (this.GetComponent<Colourable>().color == other.GetComponent<Colourable>().color)
+    {
+      Destroy(this.gameObject);
+    }
+    else
+    {
+      flasher.flash();
+      Draggable d = other.GetComponent<Draggable>();
+      if (d)
+      {
+        Destroy(other.gameObject);
+      }
+      else
+      {
+        Destroy(this.gameObject);
+      }
+    }
+  }
 
-
-	void OnTriggerEnter(Collider other) {
-		if (this.GetComponent<Colourable>().color == other.GetComponent<Colourable>().color)
-		{
-			Destroy(this.gameObject);
-		} 
-		else 
-		{
-			Destroy(this.gameObject);
-			Draggable d = other.GetComponent<Draggable>();
-			if (d)
-			{
-				d.ResetPosition();
-			}
-			flasher.flash();
-		}
-
-
-	}
-
-
-	// Use this for initialization
-	void Awake () {
-		this.GetComponent<Colourable>().color = Random.Range(0,3);
-		flasher = GameObject.FindGameObjectWithTag("redflash").GetComponent<Flasher>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	}
-	
+  void Awake()
+  {
+    this.GetComponent<Colourable>().color = Random.Range(0,3);
+    flasher = GameObject.FindGameObjectWithTag("redflash").GetComponent<Flasher>();
+  }
 }
-	
