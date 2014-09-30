@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using TouchScript.Gestures;
 
 public class Draggable : MonoBehaviour
 {
@@ -21,14 +22,28 @@ public class Draggable : MonoBehaviour
     dragging = false;
   }
 
-  void OnMouseDown()
+  private void OnEnable()
+  {
+    GetComponent<PanGesture>().PanStarted += handlePanStarted;
+    GetComponent<PanGesture>().Panned += handlePanned;
+    GetComponent<PanGesture>().PanCompleted += handlePanCompleted;
+  }
+
+  private void OnDisable()
+  {
+    GetComponent<PanGesture>().PanStarted -= handlePanStarted;
+    GetComponent<PanGesture>().Panned -= handlePanned;
+    GetComponent<PanGesture>().PanCompleted -= handlePanCompleted;
+  }
+
+  private void handlePanStarted(object sender, System.EventArgs e)
   {
     screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position);
     offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
     dragging = true;
   }
 
-  void OnMouseDrag()
+  private void handlePanned(object sender, System.EventArgs e)
   {
     if (!dragging)
     {
@@ -42,7 +57,7 @@ public class Draggable : MonoBehaviour
     transform.position = curPosition;
   }
 
-  void OnMouseUp()
+  private void handlePanCompleted(object sender, System.EventArgs e)
   {
     dragging = false;
   }
