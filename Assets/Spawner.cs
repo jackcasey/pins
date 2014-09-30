@@ -3,12 +3,13 @@ using System.Collections;
 
 public class Spawner : MonoBehaviour {
 
-	public float spawnTime;
+	private float spawnTime = 0.75f;
 	public float minX;
 	public float maxX;
 	public float setY;
 	public float setZ;
 	public GameObject spawn;
+	public float speed = 1.0f;
 
 
 	// Use this for initialization
@@ -25,8 +26,11 @@ public class Spawner : MonoBehaviour {
 	{
 		while( true )
 		{
-			Instantiate(spawn, new Vector3(Random.Range (minX, maxX), setY, setZ), new Quaternion());
+			GameObject go = Instantiate(spawn, new Vector3(Random.Range (minX, maxX), setY, setZ), new Quaternion()) as GameObject;
+			Ball b = go.GetComponent<Ball>();
+			b.Push(speed);
 			yield return new WaitForSeconds( spawnTime );
+			spawnTime *= 0.98f;
 		}
 	}
 

@@ -10,6 +10,11 @@ public class Ball : MonoBehaviour {
 		if (this.GetComponent<Colourable>().color == other.GetComponent<Colourable>().color)
 		{
 			Destroy(this.gameObject);
+			Draggable d = other.GetComponent<Draggable>();
+			if (d)
+			{
+				d.Hit();
+			}
 		} 
 		else 
 		{
@@ -30,6 +35,10 @@ public class Ball : MonoBehaviour {
 	void Awake () {
 		this.GetComponent<Colourable>().color = Random.Range(0,3);
 		flasher = GameObject.FindGameObjectWithTag("redflash").GetComponent<Flasher>();
+	}
+
+	public void Push(float speed) {
+		this.rigidbody.AddForce( new Vector3(0.0f, -speed*150.0f, 0.0f) );
 	}
 	
 	// Update is called once per frame
