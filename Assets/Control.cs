@@ -1,15 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Control : MonoBehaviour {
+public class Control : MonoBehaviour
+{
+  void Start()
+  {
+  }
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	void Update(){
-		if (Input.GetKeyDown(KeyCode.Escape)) 
-			Application.Quit(); 
-	}
+  void Update()
+  {
+    if (Input.GetKeyDown(KeyCode.Escape))
+    {
+      Application.Quit();
+    }
+  }
 }
