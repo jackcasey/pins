@@ -15,16 +15,12 @@ public class Spawner : MonoBehaviour
     StartCoroutine(Spawnit());
   }
 
-  void Update()
-  {
-  }
-
   IEnumerator Spawnit()
   {
     while (true)
     {
       Instantiate(spawn, new Vector3(Random.Range (minX, maxX), setY, setZ), new Quaternion());
-      yield return new WaitForSeconds( spawnTime );
+      yield return new WaitForSeconds(spawnTime);
     }
   }
 }

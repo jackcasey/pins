@@ -17,8 +17,4 @@ public class Colourable : MonoBehaviour
   {
     renderer.material.color = colors[color];
   }
-
-  void Update()
-  {
-  }
 }

@@ -13,13 +13,16 @@ public class Ball : MonoBehaviour
     }
     else
     {
-      Destroy(this.gameObject);
+      flasher.flash();
       Draggable d = other.GetComponent<Draggable>();
       if (d)
       {
-        d.ResetPosition();
+        Destroy(other.gameObject);
       }
-      flasher.flash();
+      else
+      {
+        Destroy(this.gameObject);
+      }
     }
   }
 
@@ -28,9 +31,4 @@ public class Ball : MonoBehaviour
     this.GetComponent<Colourable>().color = Random.Range(0,3);
     flasher = GameObject.FindGameObjectWithTag("redflash").GetComponent<Flasher>();
   }
-
-  void Update()
-  {
-  }
 }
-

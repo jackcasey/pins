@@ -38,8 +38,9 @@ public class Draggable : MonoBehaviour
 
   private void handlePanStarted(object sender, System.EventArgs e)
   {
+    var gesture = (PanGesture)sender;
     screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position);
-    offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
+    offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(gesture.ScreenPosition.x, gesture.ScreenPosition.y, screenPoint.z));
     dragging = true;
   }
 
@@ -49,7 +50,8 @@ public class Draggable : MonoBehaviour
     {
       return;
     }
-    Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
+    var gesture = (PanGesture)sender;
+    Vector3 curScreenPoint = new Vector3(gesture.ScreenPosition.x, gesture.ScreenPosition.y, screenPoint.z);
     Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
     float x = Mathf.Min (curPosition.x, max);
     x = Mathf.Max (x, min);
